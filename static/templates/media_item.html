@@ -1,0 +1,125 @@
+{% extends "base.html" %}
+
+{% block content %}
+
+<div class="container" style=" padding-top: 20px;">	
+	
+	<div class="row">
+		<div class="col-md-6">
+				<div class="media">
+				  <div class="media-left">
+
+					  <img class="media-object" src="/{{object.image_path }}" alt="...">
+
+				  </div>
+				  <div class="media-body">
+					<h2 class="media-heading">{{ object.name }}</h2>
+					<p>{{ object.author }}</p>
+					
+					<form action="" method="post"> {% csrf_token %}
+						<input type="hidden" name="favme" value="1">
+						<input class='{{ favbtn_class }}' type="submit" value="{{ favbody }}" />			   
+					</form>
+		
+					
+				  </div>
+				</div>
+			
+			
+		</div>
+	</div>
+
+	<br/><br/>
+	<div class="row">
+
+		<!-- Critic Scores -->
+		<div class="col-md-6">
+
+		<h4> Critic reviews: </h4>
+
+		{% if CriticReviews %}
+			{% for review in CriticReviews %}
+			<div class="row media">
+				<div class="col-md-12">
+
+					<div class="media">
+					  <div class="media-body">
+						<h4 class="media-heading"> <span class="label label-{{object.critic_background}}">{{object.score}}</span> <a href="/profile/critic/{{ review.criticid }}"> {{ review.critic.name }} </a></h4>
+						{{ review.body }}... <a href="{{ review.url }}">Read full review.</a>
+					  </div>
+					</div>
+
+				</div>
+			</div>
+			{% endfor %}
+			
+		{% endif %}
+		</div>
+
+		<!-- User Scores -->
+		<div class="col-md-6">
+			{% if UserReviews %}
+
+
+		<h4>User reviews:</h4>
+
+		{% for review in UserReviews %}
+		<div class="row media">
+			<div class="col-md-12">
+
+				<div class="media">
+				  <div class="media-body">
+					<h4 class="media-heading"> <span class="label label-{{object.critic_background}}" style="display:inline-block;">{{review.score}}</span> <a href="/profile/user/{{ review.user.id }}"> {{ review.user.username }} </a></h4>
+					{{ review.body }}
+				  </div>
+				</div>
+
+			</div>
+
+
+
+		</div>
+		{% endfor %}
+		
+		
+		{% endif %}
+
+				<h4>Your review:</h4>
+					<form action="" method="post"> {% csrf_token %}
+
+						<textarea class="form-control" name="body" value="Write your review..." style="width: 300px;" rows="3"></textarea>
+						<!-- <input style="width:300px; height:150px;" type="text" name="body" value="Write your review..."/> -->
+						
+						<input type="radio" name="rate" value=1 /> 1
+						<input type="radio" name="rate" value=2 /> 2
+						<input type="radio" name="rate" value=3 /> 3
+						<input type="radio" name="rate" value=4 /> 4
+						<input type="radio" name="rate" value=5 /> 5
+						<input type="radio" name="rate" value=6 /> 6
+						<input type="radio" name="rate" value=7 /> 7
+						<input type="radio" name="rate" value=8 /> 8
+						<input type="radio" name="rate" value=9 /> 9
+						<input type="radio" name="rate" value=10 /> 10
+						<br/>
+						
+						<input class='btn btn-success' type="submit" value="Rate" />
+
+						<br />
+						<br />
+					   
+
+					</form>
+			
+		</div>		
+
+
+
+	</div>
+							
+					
+		</div>
+
+
+
+
+{% endblock %}

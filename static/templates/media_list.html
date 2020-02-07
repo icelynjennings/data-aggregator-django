@@ -1,0 +1,87 @@
+{% extends "base.html" %}
+
+{% block content %}
+
+
+
+<div class="container" style=" padding-top: 20px;">	
+
+<div class="col-md-10">
+
+			{% for Item in results %}
+			<div class="media" style="display:inline-block; max-width:45%; ">
+				<div class="media-left">
+					<a href="/music/{{Item.url}}"><img style="width: 100px; height: 100px;"src="/{{ Item.image_path }} "></a>	
+				</div>
+				<div class="media-body">
+					<h4 class="media-heading"> <span class="label label-{{Item.background}}">{{Item.score}}</span> <a href="/music/{{Item.url}}"> {{ Item.name }} </a></h4>	
+					<p>{{ Item.author }}</p>
+				</div>					
+			</div>
+			{% endfor %}
+
+
+</div>
+<div class="col-md-2">
+
+      <form action="" class="navbar-form navbar-left" role="search" method="get"> 
+
+	 <h2> Filter by: </h2>
+	 		
+		  <label class="control-label">Title:</label> <br/>
+          <input type="text" name="title" class="form-control" placeholder=""> <br/> <br/>
+		  
+		  <label class="control-label">Artists:</label> <br/>
+		  <input type="text" name="author" class="form-control" placeholder=""> <br/> <br/>
+		  
+		  <label class="control-label">Genres:</label> <br/>
+		  <input type="text" name="genres" class="form-control" placeholder=""> <br/> <br/>	  
+
+		  <label class="control-label">Released between:</label>
+		  <input type="date" name="date_start" id="date_start" class="form-control" placeholder="YYYY-MM-DD">
+		  
+		  <label class="control-label">and</label>
+		  <input type="date" name="date_end" id="date_end" class="form-control" placeholder="YYYY-MM-DD"> 
+		   
+		    
+<br/><br/>
+
+		  <label class="control-label" name="min-score">Min score: </label>
+		  <br />
+		 <select name="min_score">
+		  <option value=0 selected="selected">0</option>
+		  <option value=1>1</option>
+		  <option value=2>2</option>
+		  <option value=3>3</option>
+		  <option value=4>4</option>
+		  <option value=5>5</option>
+		  <option value=6>6</option>
+		  <option value=7>7</option>
+		  <option value=8>8</option>
+		  <option value=9>9</option>
+		  <option value=10>10</option>
+		</select> 
+		  <br /> <br />
+		  <label class="control-label" name="max-score">Max score: </label>
+		  <br />
+		 <select name="max_score">
+		  <option value=0 >0</option>
+		  <option value=1>1</option>
+		  <option value=2>2</option>
+		  <option value=3>3</option>
+		  <option value=4>4</option>
+		  <option value=5>5</option>
+		  <option value=6>6</option>
+		  <option value=7>7</option>
+		  <option value=8>8</option>
+		  <option value=9>9</option>
+		  <option value=10 selected="selected">10</option>
+		</select> 
+		<br /> <br />
+
+        <button type="submit" class="btn btn-default">Filter</button>
+      </form>
+</div>
+
+</div>
+{% endblock %}

@@ -1,0 +1,137 @@
+{% extends "base.html" %}
+
+{% block content %}
+
+<div class="container" style=" padding-top: 20px;">	
+	
+	<div class ="col-md-12">
+		<h2>Welcome to {{profile.username}}'s profile!</h2>
+		<p> 
+		<a href="/profile/user/{{profile.id}}/">Reviews</a> |
+		<a href="/profile/user/{{profile.id}}/favorites">Favorites</a>
+		{% if sameuser %}
+		| <a href="/profile/user/{{profile.id}}/edit">Edit account</a>
+		{% endif %}
+		</p>
+	</div>
+
+			<div class="col-md-10">
+
+			{% if UserReviews %}
+
+
+		<h4>Reviews by this user:</h4>
+		
+		{% for review in UserReviews %}
+		<div class="row media">
+		<div class="col-md-10">
+
+		<div class="media">
+		  <div class="media-left">
+		  
+		  
+
+						<div style="border-radius: 40px; width:64px; height:64px; background-image: url({{ review.background }}	)">
+						
+						<h3 style="text-align: center; vertical-align: middle; line-height: 64px;">	{{ review.score }}  </h3> 
+						</div>
+		  </div>
+		  <div class="media-body">
+		  <h4 class="media-heading"><a href="{{review.url}}">{{ review.itemname }}</a> </h4> 
+			{{ review.body }}
+		  </div>
+		</div>
+
+		</div>
+		<div class="col-md-2">
+		<img class="img-circle" style="margin-right: 20px; width: 64px; height: 64px; float:left" src="/{{ review.image_path }} ">
+				  {% if sameuser %} 
+
+					<form action="" method="post"> {% csrf_token %}
+						<input type="hidden" name="remove" value="{{ review.id }}">
+						<input class='btn-danger' type="submit" value="x" />			   
+
+					</form>
+
+		  
+		  {% endif %}
+		</div>
+
+
+
+		</div>
+		{% endfor %}
+				
+		{% endif %}
+							
+					
+		</div>
+		
+			<div class="col-md-2">
+
+      <form action="" class="navbar-form navbar-left" role="search" method="get"> 
+
+				 <h4> Filter bfy: </h4>
+				 
+		  <label class="control-label" name="min-score">Min score: </label>
+		  <br />
+		 <select name="min_score">
+		  <option value=0 selected="selected">0</option>
+		  <option value=1>1</option>
+		  <option value=2>2</option>
+		  <option value=3>3</option>
+		  <option value=4>4</option>
+		  <option value=5>5</option>
+		  <option value=6>6</option>
+		  <option value=7>7</option>
+		  <option value=8>8</option>
+		  <option value=9>9</option>
+		  <option value=10>10</option>
+		</select> 
+		  <br /> <br />
+		  <label class="control-label" name="max-score">Max score: </label>
+		  <br />
+		 <select name="max_score">
+		  <option value=0 >0</option>
+		  <option value=1>1</option>
+		  <option value=2>2</option>
+		  <option value=3>3</option>
+		  <option value=4>4</option>
+		  <option value=5>5</option>
+		  <option value=6>6</option>
+		  <option value=7>7</option>
+		  <option value=8>8</option>
+		  <option value=9>9</option>
+		  <option value=10 selected="selected">10</option>
+		</select> 
+		
+		
+		<br /> <br />
+		  <label class="control-label">Media type:</label> <br/>
+		 <select name="type">
+		  <option value="movie">Film</option>
+		  <option value="game">Game</option>
+		  <option value="music">Music</option>
+		</select> 
+		  
+<br /> <br />
+		
+		  <label class="control-label">Name:</label> <br/>
+          <input type="text" name="title" class="form-control" placeholder=""> <br/> 
+		  
+		  <label class="control-label">Body:</label> <br/>
+		  <input type="text" name="body" class="form-control" placeholder=""> <br/>
+		    
+<br/><br/>
+
+
+        <button type="submit" class="btn btn-default">Filter</button>
+      </form>
+	  
+			</div>
+
+
+
+</div>
+<br /> <br />
+{% endblock %}

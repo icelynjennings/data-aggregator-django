@@ -1,0 +1,53 @@
+{% extends "base.html" %}
+
+{% block content %}
+
+<div class="container" style=" padding-top: 20px;">	
+	
+	<div class ="col-md-12">
+		<h2>Welcome to {{profile.username}}'s profile!</h2>
+		<p> 
+		<a href="/profile/user/{{profile.id}}/">Reviews</a> 
+		| <a href="/profile/user/{{profile.id}}/favorites">Favorites</a> 
+		{% if sameuser %}
+		| <a href="/profile/user/{{profile.id}}/edit">Edit account</a>
+		{% endif %}
+		</p>
+	</div>
+
+			<div class="col-md-10">
+
+		<h4>{{ message }}</h4>
+
+
+		<h4>Edit account details:</h4>
+				
+      <form action="" class="navbar-form navbar-left" role="search" method="post"> {% csrf_token %} 
+	  
+	  		  <label class="control-label" for="id_{{ field.name }}">Current password:</label> <br />
+        <input type="password" class="form-control" name="oldpassword" required autofocus> <br /> <br />
+		
+		  <label class="control-label" for="id_{{ field.name }}">New username:</label> <br />
+        <input type="username" class="form-control" name="newusername">		
+		<br />
+		  <label class="control-label" for="id_{{ field.name }}">New password:</label> <br />
+        <input type="password" class="form-control" name="newpassword"> <br />
+
+ 
+
+        <button type="submit" class="btn btn-default">Submit</button>
+      </form>				
+					
+		</div>
+		
+			<div class="col-md-2">
+
+
+	  
+			</div>
+
+
+
+</div>
+<br /> <br />
+{% endblock %}

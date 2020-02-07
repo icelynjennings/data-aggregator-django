@@ -1,0 +1,65 @@
+{% extends "base.html" %}
+{% block content %}
+
+	<div class="container">	
+	
+		<div class="row">
+			<h3> <span class="glyphicon glyphicon-film" aria-hidden="true"></span> Film</h3>	
+			
+			{% for Item in movies %}
+			<div class="media" style="display:inline-block; max-width:45%; ">
+				<div class="media-left">
+					<a href="/movie/{{Item.url}}"><img style="width: 100px; height: 100px;"src=" {{ Item.image_path }} "></a>	
+				</div>
+				<div class="media-body">
+					<h4 class="media-heading"> <span class="label label-{{Item.background}}">{{Item.score}}</span> <a href="/movie/{{Item.url}}"> {{ Item.name }} </a></h4>	
+					<p>{{ Item.author }}</p>
+				</div>					
+			</div>
+			{% endfor %}
+			
+		</div>	
+		
+
+	
+		<div class="row">
+			<h3> <span class="glyphicon glyphicon-music" aria-hidden="true"></span> Music</h3>
+
+			
+			{% for Item in music %}
+			<div class="media" style="display:inline-block; max-width:45%; ">
+				<div class="media-left">
+					<a href="/music/{{Item.url}}"><img style="width: 100px; height: 100px;"src=" {{ Item.image_path }} "></a>	
+				</div>
+				<div class="media-body">
+					<h4 class="media-heading"> <span class="label label-{{Item.background}}">{{Item.score}}</span> <a href="/music/{{Item.url}}"> {{ Item.name }} </a></h4>	
+					<p>{{ Item.author }}</p>
+				</div>					
+			</div>
+			{% endfor %}
+
+		</div>	
+				
+		<div class="row">
+			<h3> <span class="glyphicon glyphicon-pawn" aria-hidden="true"></span> Games</h3>	
+			
+				{% for Item in games %}
+			<div class="media" style="display:inline-block; max-width:45%; ">
+				<div class="media-left">
+					<a href="/game/{{Item.url}}"><img style="width: 100px; height: 100px;"src=" {{ Item.image_path }} "></a>	
+				</div>
+				<div class="media-body">
+					<h4 class="media-heading"> <span class="label label-{{Item.background}}">{{Item.score}}</span> <a href="/game/{{Item.url}}"> {{ Item.name }} </a></h4>	
+					<p>{{ Item.author }}</p>
+				</div>					
+			</div>
+				{% endfor %}
+
+		</div>
+			
+    </div>			
+
+{% endblock %}
+	
+	  
+

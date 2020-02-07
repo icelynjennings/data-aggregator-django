@@ -1,0 +1,41 @@
+{% extends "base.html" %}
+
+{% block content %}
+
+
+
+<div class="container" style=" padding-top: 20px;">	
+
+{% for review in reviews %}
+
+		<div class="row media">
+		<div class="col-md-12">
+
+		<div class="media">
+		  <div class="media-left">
+		  
+						<div style="border-radius: 40px; width:64px; height:64px; background-image: url({{ review.background }} )">
+						
+						<h3 style="text-align: center; vertical-align: middle; line-height: 64px;">	{{ review.score }} </h3> 
+						</div>
+		  
+		  
+		  
+		  </div>
+		  <div class="media-body">
+			<h4 class="media-heading">{{ review.critic.name }}</h4>
+			{{ review.body }}... <a href="{{ review.url }}">Read full review.</a>
+		  </div>
+		</div>
+
+		</div>
+
+
+
+		</div>
+
+{% endfor %}
+
+</div>
+
+{% endblock %}
